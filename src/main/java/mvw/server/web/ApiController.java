@@ -44,7 +44,6 @@ public class ApiController {
 			@RequestParam long userid, 
 			@RequestParam long timeout, 
 			@RequestParam long displayid) {
-		System.out.println("req recieved");
 		var deferredRes = new DeferredResult<ResponseEntity<String>>(timeout);
 		var threadResults = new AtomicReferenceArray<Object>(3);
 		
@@ -72,7 +71,6 @@ public class ApiController {
 			@RequestParam long userid, 
 			@RequestParam long timeout, 
 			@RequestParam long videoid) {
-		System.out.println("req recieved");
 		var deferredRes = new DeferredResult<ResponseEntity<String>>(timeout);
 		var threadResults = new AtomicReferenceArray<Object>(3);
 		
