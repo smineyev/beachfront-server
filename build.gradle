@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'application'
 }
 
 group = 'mvw'
@@ -21,4 +22,9 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'mvw.server.App'
+    applicationDefaultJvmArgs = ['-Xmx2048m']
 }
