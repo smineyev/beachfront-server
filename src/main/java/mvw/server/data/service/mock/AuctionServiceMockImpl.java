@@ -3,6 +3,8 @@ package mvw.server.data.service.mock;
 import java.util.Optional;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +13,7 @@ import mvw.server.data.service.AuctionSevice;
 
 @Configuration
 public class AuctionServiceMockImpl implements AuctionSevice {
+	private static final Logger logger = LoggerFactory.getLogger(AuctionServiceMockImpl.class);
 
 	@Value(value = "${spring.maxSleepTime}")
 	private int maxSleepTime;
@@ -26,7 +29,7 @@ public class AuctionServiceMockImpl implements AuctionSevice {
 			Thread.sleep(rnd.nextInt(maxSleepTime));
 			return Optional.of(new Buyer(rnd.nextLong()));
 		} catch (InterruptedException e) {
-			System.out.println("interrupted");
+			logger.warn("interrupted");
 			return Optional.empty();
 		}
 	}
@@ -38,7 +41,7 @@ public class AuctionServiceMockImpl implements AuctionSevice {
 			Thread.sleep(rnd.nextInt(maxSleepTime));
 			return Optional.of(new Buyer(rnd.nextLong()));
 		} catch (InterruptedException e) {
-			System.out.println("interrupted");
+			logger.warn("interrupted");
 			return Optional.empty();
 		}
 	}

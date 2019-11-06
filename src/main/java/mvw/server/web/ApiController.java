@@ -7,6 +7,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Supplier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import mvw.server.data.service.UserService;
 
 @RestController
 public class ApiController {
+	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
 	@Autowired
 	private ExecutorService taskExecutor;
@@ -52,7 +55,7 @@ public class ApiController {
 		var futureCookies = submitTask(2, deferredRes, threadResults, ()-> cookieService.findCookies(userid));
 		
 		deferredRes.onTimeout(() -> { 
-			System.err.println("req timeout");
+			logger.warn("req timeout");
 			
 			deferredRes.setErrorResult(
 			    ResponseEntity
@@ -79,7 +82,7 @@ public class ApiController {
 		var futureCookies = submitTask(2, deferredRes, threadResults, ()-> cookieService.findCookies(userid));
 		
 		deferredRes.onTimeout(() -> { 
-			System.err.println("req timeout");
+			logger.warn("req timeout");
 			
 			deferredRes.setErrorResult(
 			    ResponseEntity
@@ -126,6 +129,6 @@ public class ApiController {
 						", num_of_cookies: "+cookies.size() + " }";
 		httpRes.setResult(ResponseEntity.ok(body));
 		
-		System.out.println("req ok");
+		logger.info("req ok");
 	}
 }
